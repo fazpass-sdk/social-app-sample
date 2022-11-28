@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:enterFadeDuration="@integer/material_motion_duration_short_1"
+    android:exitFadeDuration="@integer/material_motion_duration_short_1">
+
+    <item android:drawable="@drawable/ic_baseline_share_24"
+        android:state_checked="true" />
+    <item android:drawable="@drawable/ic_outline_share_24" />
+</selector>

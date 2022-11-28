@@ -3,16 +3,18 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.fazpass.social"
         minSdk 24
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
@@ -30,9 +32,27 @@ android {
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.navigation:navigation-ui:2.5.3'
+    implementation 'androidx.navigation:navigation-fragment:2.5.3'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+
+    // TRUSTED DEVICE DEPENDENCY AND ALL OF IT'S DEPENDENCIES
+    implementation 'com.github.fazpass-sdk:trusted-device:1.0.11'
+    /*implementation 'com.google.android.material:material:1.7.0'
+    implementation 'com.google.firebase:firebase-messaging:23.1.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'androidx.biometric:biometric:1.1.0'
+    implementation 'com.scottyab:rootbeer-lib:0.1.0'
+    implementation 'at.favre.lib:bcrypt:0.9.0'
+    implementation 'io.sentry:sentry-android:6.4.1'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:3.9.1"
+    implementation 'com.github.framgia:android-emulator-detector:1.4.0'*/
 }

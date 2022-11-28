@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="default_text_color">#FFFFFF</color>
+    <color name="secondary_text_color">#C9C9C9</color>
+    <color name="error_text_color">#FF9E80</color>
+    <color name="bg_scaffold">#121212</color>
+    <color name="bg_white_and_black">#121212</color>
+    <color name="bg_unread_notif">#423B00</color>
+</resources>
