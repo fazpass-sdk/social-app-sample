@@ -109,7 +109,7 @@ public class ConfirmLoginViewModel extends ViewModel {
                 (alertDialog, input) -> {
                     if (otpId[0] != null) {
                         alertDialog.dismiss();
-                        smsConfirmOtpNumber(input, otpId[0]);
+                        confirmOtpNumber(input, otpId[0]);
                     } else {
                         Toast.makeText(fragment.getContext(), "Would you kindly wait for your message to arrive?", Toast.LENGTH_LONG).show();
                     }
@@ -121,7 +121,7 @@ public class ConfirmLoginViewModel extends ViewModel {
                 }).getInstance();
         dialog.show();
 
-        Fazpass.requestOtpByPhone(fragment.requireContext(), user.getPhone(), fragment.getString(R.string.otp_sms_gateway_key), new Otp.Request() {
+        Fazpass.generateOtpByPhone(fragment.requireContext(), user.getPhone(), fragment.getString(R.string.otp_sms_gateway_key), new Otp.Request() {
             @Override
             public void onComplete(OtpResponse otpResponse) {
                 otpId[0] = otpResponse.getOtpId();
@@ -130,7 +130,7 @@ public class ConfirmLoginViewModel extends ViewModel {
             @Override
             public void onIncomingMessage(String s) {
                 dialog.dismiss();
-                smsConfirmOtpNumber(s, otpId[0]);
+                confirmOtpNumber(s, otpId[0]);
             }
 
             @Override
@@ -141,10 +141,90 @@ public class ConfirmLoginViewModel extends ViewModel {
         });
     }
 
-    private void smsConfirmOtpNumber(String inputtedOtp, String otpId) {
+    public void miscallVerificationOption() {
+        final String[] otpId = new String[1];
+
+        AlertDialog dialog = new DialogInputNumber(
+                fragment, "Miscall OTP Verification", R.string.sms_verification_message, 4,
+                (alertDialog, input) -> {
+                    if (otpId[0] != null) {
+                        alertDialog.dismiss();
+                        confirmOtpNumber(input, otpId[0]);
+                    } else {
+                        Toast.makeText(fragment.getContext(), "Would you kindly wait for your miscall?", Toast.LENGTH_LONG).show();
+                    }
+                    return null;
+                },
+                alertDialog -> {
+                    alertDialog.dismiss();
+                    return null;
+                }).getInstance();
+        dialog.show();
+
+        Fazpass.generateOtpByPhone(fragment.requireContext(), user.getPhone(), fragment.getString(R.string.otp_miscall_gateway_key), new Otp.Request() {
+            @Override
+            public void onComplete(OtpResponse otpResponse) {
+                otpId[0] = otpResponse.getOtpId();
+            }
+
+            @Override
+            public void onIncomingMessage(String s) {
+                dialog.dismiss();
+                confirmOtpNumber(s, otpId[0]);
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                dialog.dismiss();
+                failedLogin("Failed to request Miscall Otp. Please try again later.");
+            }
+        });
+    }
+
+    public void emailVerificationOption() {
+        final String[] otpId = new String[1];
+
+        AlertDialog dialog = new DialogInputNumber(
+                fragment, "Email OTP Verification", R.string.email_verification_message, 4,
+                (alertDialog, input) -> {
+                    if (otpId[0] != null) {
+                        alertDialog.dismiss();
+                        confirmOtpNumber(input, otpId[0]);
+                    } else {
+                        Toast.makeText(fragment.getContext(), "Would you kindly wait for your email to arrive?", Toast.LENGTH_LONG).show();
+                    }
+                    return null;
+                },
+                alertDialog -> {
+                    alertDialog.dismiss();
+                    return null;
+                }).getInstance();
+        dialog.show();
+
+        Fazpass.generateOtpByEmail(fragment.requireContext(), user.getEmail(), fragment.getString(R.string.otp_email_gateway_key), new Otp.Request() {
+            @Override
+            public void onComplete(OtpResponse otpResponse) {
+                otpId[0] = otpResponse.getOtpId();
+            }
+
+            @Override
+            public void onIncomingMessage(String s) {
+                dialog.dismiss();
+                confirmOtpNumber(s, otpId[0]);
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                dialog.dismiss();
+                failedLogin("Failed to request Email Otp. Please try again later.");
+            }
+        });
+    }
+
+    private void confirmOtpNumber(String inputtedOtp, String otpId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(fragment.requireContext());
         builder.setTitle("Confirming OTP")
-                .setMessage(R.string.sms_confirming_message)
+                .setMessage(R.string.confirming_message)
                 .setCancelable(false);
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -179,17 +259,6 @@ public class ConfirmLoginViewModel extends ViewModel {
         });
     }
 
-    private void successLogin() {
-        Storage.saveUser(fragment.requireContext(), user);
-
-        Navigation.findNavController(fragment.requireView())
-                .navigate(R.id.action_confirmLoginFragment_to_mainFragment);
-    }
-
-    private void failedLogin(String errorMessage) {
-        fragment.showErrorMessage(errorMessage);
-    }
-
     private void enroll(FazpassTd o) {
         AlertDialog.Builder builder = new AlertDialog.Builder(fragment.requireContext());
         builder.setTitle("Finishing Login")
@@ -216,5 +285,16 @@ public class ConfirmLoginViewModel extends ViewModel {
                 fragment.showErrorMessage("Failed to enroll this device. Check your internet and try again.");
             }
         });
+    }
+
+    private void successLogin() {
+        Storage.saveUser(fragment.requireContext(), user);
+
+        Navigation.findNavController(fragment.requireView())
+                .navigate(R.id.action_confirmLoginFragment_to_mainFragment);
+    }
+
+    private void failedLogin(String errorMessage) {
+        fragment.showErrorMessage(errorMessage);
     }
 }

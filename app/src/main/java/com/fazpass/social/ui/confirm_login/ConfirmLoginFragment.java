@@ -44,13 +44,14 @@ public class ConfirmLoginFragment extends Fragment {
         greetingTxt.setText(getString(R.string.greeting_message, mViewModel.getUser().getName()));
 
         Button cdNotifBtn = v.findViewById(R.id.cd_notif_btn);
-        if (!mViewModel.isCDAvailable()) {
-            cdNotifBtn.setEnabled(false);
-        }
+        if (!mViewModel.isCDAvailable()) cdNotifBtn.setEnabled(false);
         cdNotifBtn.setOnClickListener(view -> mViewModel.crossDeviceNotificationOption());
-
         Button smsVerBtn = v.findViewById(R.id.sms_ver_btn);
         smsVerBtn.setOnClickListener(view -> mViewModel.smsVerificationOption());
+        Button miscallVerBtn = v.findViewById(R.id.miscall_ver_btn);
+        miscallVerBtn.setOnClickListener(view -> mViewModel.miscallVerificationOption());
+        Button emailVerBtn = v.findViewById(R.id.email_ver_btn);
+        emailVerBtn.setOnClickListener(view -> mViewModel.emailVerificationOption());
 
         errorTxt = v.findViewById(R.id.error_txt2);
 

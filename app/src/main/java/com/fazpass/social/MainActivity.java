@@ -16,5 +16,6 @@ public class MainActivity extends AppCompatActivity {
 
         Fazpass.initialize(this, getResources().getString(R.string.merchant_key), MODE.STAGING);
         Fazpass.launchedFromNotificationRequirePin(this, getIntent());
+        Fazpass.requestPermission(this);
     }
 }

@@ -74,7 +74,7 @@ public class LoginFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        mViewModel.init(this);
+        mViewModel.initialize(this);
     }
 
     public void showErrorMessage(String message) {

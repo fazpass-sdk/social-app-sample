@@ -22,7 +22,7 @@ public class LoginViewModel extends ViewModel {
     private LoginFragment fragment;
     private AlertDialog dialog;
 
-    public void init(LoginFragment fragment) {
+    public void initialize(LoginFragment fragment) {
         this.fragment = fragment;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(fragment.requireContext());
@@ -38,14 +38,14 @@ public class LoginViewModel extends ViewModel {
             return;
         }
 
-        User u = new User(email, phone, email.split("@")[0],"","", pin);
-        User.setIsUseFinger(false);
-
         dialog.show();
 
+        User u = new User(email, phone, email.split("@")[0],"","", pin);
+        User.setIsUseFinger(false);
         Fazpass.check(fragment.getContext(), email, phone, pin, new TrustedDeviceListener<FazpassTd>() {
             @Override
             public void onSuccess(FazpassTd o) {
+                dialog.dismiss();
                 if (o.td_status == TRUSTED_DEVICE.TRUSTED) {
                     successLogin(u);
                 }
@@ -56,6 +56,8 @@ public class LoginViewModel extends ViewModel {
 
             @Override
             public void onFailure(Throwable err) {
+                dialog.dismiss();
+                err.printStackTrace();
                 failedLogin("Failed to initialize login. Check your internet and try again.");
             }
         });
@@ -63,20 +65,11 @@ public class LoginViewModel extends ViewModel {
 
     private void successLogin(User u) {
         Storage.saveUser(fragment.requireContext(), u);
-
-        dialog.dismiss();
         Navigation.findNavController(fragment.requireView())
                 .navigate(R.id.action_loginFragment_to_mainFragment);
     }
 
-    private void failedLogin(String errorMessage) {
-        dialog.dismiss();
-        fragment.showErrorMessage(errorMessage);
-    }
-
     private void toConfirmOptions(User u, CROSS_DEVICE cd_status) {
-        dialog.dismiss();
-
         ArrayList<String> list = new ArrayList<>();
         list.add(u.getEmail());
         list.add(u.getPhone());
@@ -90,5 +83,9 @@ public class LoginViewModel extends ViewModel {
         args.putBoolean("ARGS_CD_IS_AVAILABLE", cd_status.equals(CROSS_DEVICE.AVAILABLE));
         Navigation.findNavController(fragment.requireView())
                 .navigate(R.id.action_loginFragment_to_confirmLoginFragment, args);
+    }
+
+    private void failedLogin(String errorMessage) {
+        fragment.showErrorMessage(errorMessage);
     }
 }
