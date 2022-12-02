@@ -8,6 +8,7 @@ import com.fazpass.social.R;
 import com.fazpass.social.data.SampleFeed;
 import com.fazpass.social.helper.Storage;
 import com.fazpass.social.object.User;
+import com.fazpass.trusted_device.Fazpass;
 
 public class MainViewModel extends ViewModel {
     private MainFragment fragment;
@@ -40,6 +41,7 @@ public class MainViewModel extends ViewModel {
     }
 
     public void logout() {
+        Fazpass.removeDevice(fragment.requireActivity().getApplicationContext());
         Storage.logout(fragment.requireContext());
 
         NavHostFragment.findNavController(fragment)
