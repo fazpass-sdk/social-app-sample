@@ -28,4 +28,5 @@
     <string name="confirming_message">\nPlease wait while we check your otp…\n</string>
     <string name="error_message_sample">Session has expired. Please login again to renew your session.</string>
     <string name="fazpass_init_failed_message">Failed to initialize %1$s. Check your internet and try again.</string>
+    <string name="login_info">*currently, phone number only works in indonesia</string>
 </resources>

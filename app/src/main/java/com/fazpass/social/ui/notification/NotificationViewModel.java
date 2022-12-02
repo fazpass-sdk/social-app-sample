@@ -3,7 +3,6 @@ package com.fazpass.social.ui.notification;
 import androidx.lifecycle.ViewModel;
 import androidx.navigation.Navigation;
 
-import com.fazpass.social.R;
 import com.fazpass.social.data.SampleFeed;
 
 public class NotificationViewModel extends ViewModel {
@@ -20,7 +19,7 @@ public class NotificationViewModel extends ViewModel {
 
     public void onBack() {
         Navigation.findNavController(fragment.requireView())
-                .navigate(R.id.action_notificationFragment_to_mainFragment);
+                .navigateUp();
     }
 
     public void initialize(NotificationFragment fragment) {

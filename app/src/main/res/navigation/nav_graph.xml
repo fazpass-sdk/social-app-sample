@@ -12,11 +12,15 @@
         <action
             android:id="@+id/action_splashFragment_to_mainFragment"
             app:destination="@id/mainFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_in_bottom"
             app:exitAnim="@anim/slide_out_top" />
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_in_bottom"
             app:exitAnim="@anim/slide_out_top" />
     </fragment>
@@ -28,13 +32,17 @@
         <action
             android:id="@+id/action_mainFragment_to_loginFragment"
             app:destination="@id/loginFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_notificationFragment"
             app:destination="@id/notificationFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -43,13 +51,17 @@
         <action
             android:id="@+id/action_loginFragment_to_mainFragment"
             app:destination="@id/mainFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_loginFragment_to_confirmLoginFragment"
             app:destination="@id/confirmLoginFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/confirmLoginFragment"
@@ -58,22 +70,14 @@
         <action
             android:id="@+id/action_confirmLoginFragment_to_mainFragment"
             app:destination="@id/mainFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left" />
-        <action
-            android:id="@+id/action_confirmLoginFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.fazpass.social.ui.notification.NotificationFragment"
         android:label="NotificationFragment" >
-        <action
-            android:id="@+id/action_notificationFragment_to_mainFragment"
-            app:destination="@id/mainFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_right" />
     </fragment>
 </navigation>

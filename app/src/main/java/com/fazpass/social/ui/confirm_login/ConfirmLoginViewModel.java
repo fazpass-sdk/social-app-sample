@@ -1,6 +1,6 @@
 package com.fazpass.social.ui.confirm_login;
 
-import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -10,6 +10,7 @@ import androidx.navigation.Navigation;
 
 import com.fazpass.social.R;
 import com.fazpass.social.component.DialogInputNumber;
+import com.fazpass.social.helper.LOGIN_TYPE;
 import com.fazpass.social.helper.Storage;
 import com.fazpass.social.object.User;
 import com.fazpass.trusted_device.CrossDeviceListener;
@@ -28,6 +29,7 @@ public class ConfirmLoginViewModel extends ViewModel {
     private User user;
     private boolean isCDAvailable;
     private ConfirmLoginFragment fragment;
+    private LOGIN_TYPE loginType;
     
     public void initialize(ConfirmLoginFragment fragment) {
         this.fragment = fragment;
@@ -41,6 +43,14 @@ public class ConfirmLoginViewModel extends ViewModel {
         isCDAvailable = CDAvailable;
     }
 
+    public LOGIN_TYPE getLoginType() {
+        return loginType;
+    }
+
+    public void setLoginType(String loginType) {
+        this.loginType = LOGIN_TYPE.valueOf(loginType);
+    }
+
     public User getUser() {
         return user;
     }
@@ -52,14 +62,9 @@ public class ConfirmLoginViewModel extends ViewModel {
         }
     }
 
-    public void navigateUp() {
-        Bundle args = new Bundle();
-        args.putString("ARGS_EMAIL", user.getEmail());
-        args.putString("ARGS_PHONE", user.getPhone());
-        args.putString("ARGS_PIN", user.getPin());
-
-        Navigation.findNavController(fragment.requireView())
-                .navigate(R.id.action_confirmLoginFragment_to_loginFragment, args);
+    public void navigateUp(View view) {
+        Navigation.findNavController(view)
+                .navigateUp();
     }
 
     public void crossDeviceNotificationOption() {

@@ -19,11 +19,7 @@ public class LoginFragment extends Fragment {
 
     private LoginViewModel mViewModel;
     private TextView errorTxt;
-
     private String errorMessageArg;
-    private String emailArg;
-    private String phoneArg;
-    private String pinArg;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,9 +28,6 @@ public class LoginFragment extends Fragment {
 
         if (getArguments() != null) {
             errorMessageArg = getArguments().getString("error_message");
-            emailArg = getArguments().getString("ARGS_EMAIL");
-            phoneArg = getArguments().getString("ARGS_PHONE");
-            pinArg = getArguments().getString("ARGS_PIN");
         }
     }
 
@@ -45,25 +38,17 @@ public class LoginFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_login, container, false);
 
         errorTxt = v.findViewById(R.id.error_txt);
-        EditText emailInput = v.findViewById(R.id.email_input);
-        EditText phoneInput = v.findViewById(R.id.phone_input);
+        EditText loginInput = v.findViewById(R.id.login_input);
         EditText pinInput = v.findViewById(R.id.pin_input);
 
         if (errorMessageArg != null)
             showErrorMessage(errorMessageArg);
-        if (emailArg != null)
-            emailInput.setText(emailArg);
-        if (phoneArg != null)
-            phoneInput.setText(phoneArg);
-        if (pinArg != null)
-            pinInput.setText(pinArg);
 
         Button loginBtn = v.findViewById(R.id.login_btn);
         loginBtn.setOnClickListener(view -> {
             errorTxt.setVisibility(View.GONE);
             mViewModel.login(
-                    emailInput.getText().toString(),
-                    phoneInput.getText().toString(),
+                    loginInput.getText().toString(),
                     pinInput.getText().toString());
         });
 

@@ -10,6 +10,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
         app:cardCornerRadius="24dp"
         app:contentPadding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,7 +24,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="start"
             android:orientation="vertical">
 
             <TextView
@@ -28,47 +32,38 @@
                 style="@style/AppTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginBottom="32dp"
                 android:textSize="18pt" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email"
+                android:text="Email / Phone Number"
                 android:textColor="@color/default_text_color" />
 
             <EditText
-                android:id="@+id/email_input"
+                android:id="@+id/login_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="beruangqutuban@gmail.com"
-                android:inputType="textEmailAddress"
+                android:hint="email@mail.com / 081234567890"
+                android:inputType="textEmailAddress|phone"
                 android:minHeight="48dp"
                 android:textColorHint="@color/secondary_text_color" />
 
             <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Phone"
-                android:textColor="@color/default_text_color" />
-
-            <EditText
-                android:id="@+id/phone_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="081234567890"
-                android:inputType="phone"
-                android:minHeight="48dp"
-                android:textColorHint="@color/secondary_text_color" />
+                android:gravity="start"
+                android:text="@string/login_info"
+                android:textColor="@color/gray_dark"
+                android:textSize="11sp" />
 
             <TextView
                 android:id="@+id/textView7"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Password"
@@ -85,10 +80,10 @@
             <TextView
                 android:id="@+id/error_txt"
                 style="@style/ErrorText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                tools:visibility="visible" />
+                tools:visibility="gone" />
 
             <Button
                 android:id="@+id/login_btn"
