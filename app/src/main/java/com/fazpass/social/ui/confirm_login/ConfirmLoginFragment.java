@@ -43,28 +43,38 @@ public class ConfirmLoginFragment extends Fragment {
         backBtn.setOnClickListener(mViewModel::navigateUp);
 
         TextView greetingTxt = v.findViewById(R.id.greeting_txt);
-        greetingTxt.setText(getString(R.string.greeting_message, mViewModel.getUser().getName()));
+        String userIdentity;
+        if (mViewModel.getUser().getName().isEmpty()) {
+            userIdentity = mViewModel.getUser().getPhone();
+        } else {
+            userIdentity = mViewModel.getUser().getName();
+        }
+        greetingTxt.setText(getString(R.string.greeting_message, userIdentity));
 
         Button cdNotifBtn = v.findViewById(R.id.cd_notif_btn);
         if (!mViewModel.isCDAvailable()) cdNotifBtn.setEnabled(false);
-        else cdNotifBtn.setOnClickListener(view -> mViewModel.crossDeviceNotificationOption());
+        else cdNotifBtn.setOnClickListener(mViewModel::crossDeviceNotificationOption);
 
         Button smsVerBtn = v.findViewById(R.id.sms_ver_btn);
         Button miscallVerBtn = v.findViewById(R.id.miscall_ver_btn);
+        Button emailVerBtn = v.findViewById(R.id.email_ver_btn);
+        Button waVerBtn = v.findViewById(R.id.wa_ver_btn);
+        Button waLongVerBtn = v.findViewById(R.id.wa_long_ver_btn);
+        Button heVerBtn = v.findViewById(R.id.he_ver_btn);
         if (mViewModel.getLoginType() == LOGIN_TYPE.phone) {
-            smsVerBtn.setOnClickListener(view -> mViewModel.smsVerificationOption());
-            miscallVerBtn.setOnClickListener(view -> mViewModel.miscallVerificationOption());
+            smsVerBtn.setOnClickListener(mViewModel::smsVerificationOption);
+            miscallVerBtn.setOnClickListener(mViewModel::miscallVerificationOption);
+            waVerBtn.setOnClickListener(mViewModel::waVerificationOption);
+            waLongVerBtn.setOnClickListener(mViewModel::waLongVerificationOption);
+            heVerBtn.setOnClickListener(mViewModel::heVerificationOption);
+            emailVerBtn.setVisibility(View.GONE);
         } else {
             smsVerBtn.setVisibility(View.GONE);
             miscallVerBtn.setVisibility(View.GONE);
-        }
-
-        Button emailVerBtn = v.findViewById(R.id.email_ver_btn);
-        if (mViewModel.getLoginType() == LOGIN_TYPE.email) {
-            emailVerBtn.setOnClickListener(view -> mViewModel.emailVerificationOption());
-        }
-        else {
-            emailVerBtn.setVisibility(View.GONE);
+            waVerBtn.setVisibility(View.GONE);
+            waLongVerBtn.setVisibility(View.GONE);
+            heVerBtn.setVisibility(View.GONE);
+            emailVerBtn.setOnClickListener(mViewModel::emailVerificationOption);
         }
 
         errorTxt = v.findViewById(R.id.error_txt2);

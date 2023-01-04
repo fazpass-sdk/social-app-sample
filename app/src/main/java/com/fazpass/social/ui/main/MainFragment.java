@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fazpass.social.R;
 import com.fazpass.social.data.SampleFeed;
 import com.fazpass.social.helper.Storage;
-import com.fazpass.social.object.User;
+import com.fazpass.trusted_device.User;
 
 public class MainFragment extends Fragment {
 
@@ -66,7 +66,7 @@ public class MainFragment extends Fragment {
 
     private boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.profile_menu_logout) {
-            mViewModel.logout();
+            mViewModel.requestLogout();
             return true;
         }
         return false;

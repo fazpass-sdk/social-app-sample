@@ -8,10 +8,10 @@ import androidx.navigation.Navigation;
 
 import com.fazpass.social.R;
 import com.fazpass.social.helper.Storage;
-import com.fazpass.social.object.User;
 import com.fazpass.trusted_device.Fazpass;
 import com.fazpass.trusted_device.FazpassTd;
 import com.fazpass.trusted_device.TrustedDeviceListener;
+import com.fazpass.trusted_device.User;
 
 public class SplashViewModel extends ViewModel {
 
@@ -24,7 +24,7 @@ public class SplashViewModel extends ViewModel {
             final User user = Storage.getUser(fragment.getContext());
 
             if (user != null) {
-                Fazpass.check(fragment.requireContext(), user.getEmail(), user.getPhone(), user.getPin(), new TrustedDeviceListener<FazpassTd>() {
+                Fazpass.check(fragment.requireContext(), user.getEmail(), user.getPhone(), new TrustedDeviceListener<FazpassTd>() {
                     @Override
                     public void onSuccess(FazpassTd o) {
                         Navigation.findNavController(fragment.requireView())

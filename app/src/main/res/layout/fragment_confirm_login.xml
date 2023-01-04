@@ -42,6 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="@string/greeting_message"
+                android:textAlignment="center"
                 android:textColor="@color/default_text_color"
                 android:textSize="16sp" />
 
@@ -51,39 +52,76 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:text="@string/confirm_login_question"
+                android:textAlignment="center"
                 android:textColor="@color/default_text_color"
                 android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/cd_notif_btn"
-                style="@style/ElevatedButton"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="Cross Device Notification" />
+                android:layout_height="260dp">
 
-            <Button
-                android:id="@+id/sms_ver_btn"
-                style="@style/ElevatedButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="SMS Verification Code" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <Button
-                android:id="@+id/miscall_ver_btn"
-                style="@style/ElevatedButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="Miscall Verification Code" />
+                    <Button
+                        android:id="@+id/cd_notif_btn"
+                        style="@style/ElevatedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Verify by Device" />
 
-            <Button
-                android:id="@+id/email_ver_btn"
-                style="@style/ElevatedButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Email Verification Code" />
+                    <Button
+                        android:id="@+id/he_ver_btn"
+                        style="@style/ElevatedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Verify by Header Enrichment" />
+
+                    <Button
+                        android:id="@+id/sms_ver_btn"
+                        style="@style/ElevatedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="SMS Verification Code" />
+
+                    <Button
+                        android:id="@+id/miscall_ver_btn"
+                        style="@style/ElevatedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Miscall Verification Code" />
+
+                    <Button
+                        android:id="@+id/wa_ver_btn"
+                        style="@style/ElevatedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="WhatsApp Verification Code" />
+
+                    <Button
+                        android:id="@+id/wa_long_ver_btn"
+                        style="@style/ElevatedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="WhatsApp Long Verification Code" />
+
+                    <Button
+                        android:id="@+id/email_ver_btn"
+                        style="@style/ElevatedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Email Verification Code" />
+
+                </LinearLayout>
+            </ScrollView>
 
             <TextView
                 android:id="@+id/error_txt2"

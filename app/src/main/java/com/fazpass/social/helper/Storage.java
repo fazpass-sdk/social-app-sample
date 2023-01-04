@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.Nullable;
 
-import com.fazpass.social.object.User;
+import com.fazpass.trusted_device.User;
 
 public class Storage {
     private static final String key_user_is_logged_in = "key_user_is_logged_in";
@@ -15,7 +15,6 @@ public class Storage {
     private static final String key_user_id_card = "key_user_id_card";
     private static final String key_user_address = "key_user_address";
     private static final String key_user_is_use_finger = "key_user_is_use_finger";
-    private static final String key_user_pin = "key_user_pin";
 
     public static void saveUser(Context context, User user) {
         SharedPreferences sharedPref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
@@ -27,7 +26,6 @@ public class Storage {
         editor.putString(key_user_id_card, user.getIdCard());
         editor.putString(key_user_address, user.getAddress());
         editor.putBoolean(key_user_is_use_finger, User.isUseFinger());
-        editor.putString(key_user_pin, user.getPin());
         editor.apply();
     }
 
@@ -43,9 +41,8 @@ public class Storage {
             String idCard = sharedPref.getString(key_user_id_card, null);
             String address = sharedPref.getString(key_user_address, null);
             boolean isUseFinger = sharedPref.getBoolean(key_user_is_use_finger, false);
-            String pin = sharedPref.getString(key_user_pin, null);
 
-            User user = new User(email, phone, name, idCard, address, pin);
+            User user = new User(email, phone, name, idCard, address);
             User.setIsUseFinger(isUseFinger);
             return user;
         }

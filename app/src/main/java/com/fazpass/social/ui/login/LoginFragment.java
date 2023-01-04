@@ -39,7 +39,6 @@ public class LoginFragment extends Fragment {
 
         errorTxt = v.findViewById(R.id.error_txt);
         EditText loginInput = v.findViewById(R.id.login_input);
-        EditText pinInput = v.findViewById(R.id.pin_input);
 
         if (errorMessageArg != null)
             showErrorMessage(errorMessageArg);
@@ -47,9 +46,7 @@ public class LoginFragment extends Fragment {
         Button loginBtn = v.findViewById(R.id.login_btn);
         loginBtn.setOnClickListener(view -> {
             errorTxt.setVisibility(View.GONE);
-            mViewModel.login(
-                    loginInput.getText().toString(),
-                    pinInput.getText().toString());
+            mViewModel.login(loginInput.getText().toString());
         });
 
         return v;
